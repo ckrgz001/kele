@@ -21,6 +21,18 @@ class Kele
     @user = JSON.parse(response.body)
   end
 
+  def get_mentor_availability(mentor_id)
+    response = self.class.get(api_url("mentors/#{mentor_id}/student_availability"), headers: { "authorization" => @auth_token })
+    available = []
+     response.each do |timeslot|
+       if timeslot["booked"] == nil
+         available.push(timeslot)
+       end
+     end
+     puts available
+  end
+
+
   private 
   
     def api_url(endpoint) #method to define web address as the end point
