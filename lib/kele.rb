@@ -1,6 +1,5 @@
 require 'httparty'
 require 'json'
-require 'roadmap'
 
 class Kele
   include HTTParty
@@ -31,6 +30,11 @@ class Kele
        end
      end
      puts available
+  end
+
+  def get_roadmap(roadmap_id)
+    response = self.class.get(api_url("roadmaps/#{roadmap_id}"), headers: { "authorization" => @auth_token })
+    @roadmap = JSON.parse(response.body)
   end
 
 
