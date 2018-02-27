@@ -1,9 +1,11 @@
 require 'httparty'
 require 'json'
-require 'roadmap'
+require_relative 'roadmap'
 
 class Kele
   include HTTParty
+  include Roadmap
+
   #To retrieve the authentication token include HTTParty in Kele,
   #use  self.class.post, and pass in the sessions URL along with username and password.
 
@@ -29,6 +31,11 @@ class Kele
        end
      end
      puts available
+  end
+
+  def get_roadmap(roadmap_id)
+    response = self.class.get(api_url("roadmaps/#{roadmap_id}"), headers: { "authorization" => @auth_token })
+    @roadmap = JSON.parse(response.body)
   end
 
 
