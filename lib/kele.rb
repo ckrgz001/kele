@@ -24,13 +24,7 @@ class Kele
 
   def get_mentor_availability(mentor_id)
     response = self.class.get(api_url("mentors/#{mentor_id}/student_availability"), headers: { "authorization" => @auth_token })
-    available = []
-     response.each do |timeslot|
-       if timeslot["booked"] == nil
-         available.push(timeslot)
-       end
-     end
-     puts available
+    JSON.parse(response.body)
   end
 
 
