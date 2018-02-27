@@ -1,9 +1,10 @@
 require 'httparty'
 require 'json'
+require 'roadmap'
 
 class Kele
   include HTTParty
-  base_uri "https://www.bloc.io/api/v1/"
+  include Roadmap
 
   #To retrieve the authentication token include HTTParty in Kele,
   #use  self.class.post, and pass in the sessions URL along with username and password.
