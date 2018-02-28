@@ -27,6 +27,15 @@ class Kele
     JSON.parse(response.body)
   end
 
+  def get_messages(page = 'all')
+    if page == 'all'
+      response = self.class.get(api_url("message_threads"), headers: { "authorization" => @auth_token })
+    else
+      response = self.class.get(api_url("message_threads?page=#{page}"), headers: { "authorization" => @auth_token })
+    end
+    JSON.parse(response.body)
+  end
+
 
   private 
   
