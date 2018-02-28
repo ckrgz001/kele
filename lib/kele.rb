@@ -52,6 +52,15 @@ class Kele
     puts "Checkpoint submitted." if response.success?
   end
 
+  def update_submission(checkpoint_id, assignment_branch, assignment_commit_link, comment, enrollment_id = @user_id, id = @submission_id)
+    response = self.class.post(api_url("checkpoint_submissions/:#{id}"),  headers: { "authorization" => @auth_token },
+    body: { checkpoint_id: checkpoint_id,
+            assignment_branch: assignment_branch,
+            assignment_commit_link: assignment_commit_link,
+            comment: comment,
+            enrollment_id: enrollment_id })
+    puts "Checkpoint updated." if response.success?
+  end
 
   private 
   
